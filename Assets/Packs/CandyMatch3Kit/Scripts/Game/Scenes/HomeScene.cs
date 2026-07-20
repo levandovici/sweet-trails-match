@@ -27,9 +27,6 @@ namespace GameVanilla.Game.Scenes
         private AnimatedButton musicButton;
 #pragma warning restore 649
 
-        private readonly string dateLastPlayedKey = "date_last_played";
-        private readonly string dailyBonusDayKey = "daily_bonus_day";
-        
         /// <summary>
         /// Unity's Awake method.
         /// </summary>
