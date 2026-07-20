@@ -72,19 +72,11 @@ namespace GameVanilla.Game.Popups
             var gameScene = parentScene as GameScene;
             if (gameScene != null)
             {
-                var numLives = PlayerPrefs.GetInt("num_lives");
-                if (numLives > 0)
-                {
-                    gameScene.RestartGame();
-                    Close();
-                }
-                else
-                {
-                    gameScene.OpenPopup<BuyLivesPopup>("Popups/BuyLivesPopup");
-                }
+                gameScene.RestartGame();
+                Close();
             }
         }
-
+    
         /// <summary>
         /// Sets the level text.
         /// </summary>

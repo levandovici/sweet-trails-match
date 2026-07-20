@@ -20,9 +20,6 @@ namespace GameVanilla.Game.Common
 
         public GameConfiguration gameConfig;
 
-        public LivesSystem livesSystem;
-        public CoinsSystem coinsSystem;
-
         public int lastSelectedLevel;
         public bool unlockedNextLevel;
 
@@ -45,19 +42,8 @@ namespace GameVanilla.Game.Common
             }
             DontDestroyOnLoad(gameObject);
 
-            livesSystem = GetComponent<LivesSystem>();
-            coinsSystem = GetComponent<CoinsSystem>();
-
             var serializer = new fsSerializer();
             gameConfig = FileUtils.LoadJsonFile<GameConfiguration>(serializer, "game_configuration");
-            if (!PlayerPrefs.HasKey("num_lives"))
-            {
-                PlayerPrefs.SetInt("num_lives", gameConfig.maxLives);
-            }
-            if (!PlayerPrefs.HasKey("num_coins"))
-            {
-                PlayerPrefs.SetInt("num_coins", gameConfig.initialCoins);
-            }
             if (!PlayerPrefs.HasKey("sound_enabled"))
             {
                 PlayerPrefs.SetInt("sound_enabled", 1);

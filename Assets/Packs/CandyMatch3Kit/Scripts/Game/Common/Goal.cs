@@ -3,6 +3,8 @@
 // a copy of which is available at http://unity3d.com/company/legal/as_terms.
 
 using UnityEngine;
+using System;
+
 
 #if UNITY_EDITOR
 
@@ -12,6 +14,7 @@ using UnityEditor;
 
 namespace GameVanilla.Game.Common
 {
+    [Serializable]
     public abstract class Goal
     {
         public abstract bool IsComplete(GameState state);
@@ -23,6 +26,7 @@ namespace GameVanilla.Game.Common
 #endif
     }
 
+    [Serializable]
     public class ReachScoreGoal : Goal
     {
         public int score;
@@ -50,6 +54,7 @@ namespace GameVanilla.Game.Common
         }
     }
 
+    [Serializable]
     public class CollectCandyGoal : Goal
     {
         public CandyColor candyType;
@@ -87,6 +92,7 @@ namespace GameVanilla.Game.Common
         }
     }
 
+    [Serializable]
     public class CollectElementGoal : Goal
     {
         public ElementType elementType;
@@ -124,6 +130,7 @@ namespace GameVanilla.Game.Common
         }
     }
 
+    [Serializable]
     public class CollectSpecialBlockGoal : Goal
     {
         public SpecialBlockType specialBlockType;
@@ -161,6 +168,7 @@ namespace GameVanilla.Game.Common
         }
     }
 
+    [Serializable]
     public class CollectCollectableGoal : Goal
     {
         public CollectableType collectableType;
@@ -198,6 +206,7 @@ namespace GameVanilla.Game.Common
         }
     }
 
+    [Serializable]
     public class DestroyAllChocolateGoal : Goal
     {
         public bool completed;

@@ -189,28 +189,6 @@ namespace GameVanilla.Editor
             GUILayout.Space(15);
 
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(new GUIContent("Limit type", "The limit type of this level."),
-                GUILayout.Width(EditorGUIUtility.labelWidth));
-            currentLevel.limitType = (LimitType) EditorGUILayout.EnumPopup(currentLevel.limitType, GUILayout.Width(100));
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            if (currentLevel.limitType == LimitType.Moves)
-            {
-                EditorGUILayout.LabelField(new GUIContent("Moves", "The maximum number of moves of this level."),
-                    GUILayout.Width(EditorGUIUtility.labelWidth));
-            }
-            else if (currentLevel.limitType == LimitType.Time)
-            {
-                EditorGUILayout.LabelField(new GUIContent("Time", "The maximum number of seconds of this level."),
-                    GUILayout.Width(EditorGUIUtility.labelWidth));
-            }
-            currentLevel.limit = EditorGUILayout.IntField(currentLevel.limit, GUILayout.Width(30));
-            GUILayout.EndHorizontal();
-
-            GUILayout.Space(15);
-
-            GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField(new GUIContent("Star 1 score", "The score needed to reach the first star."),
                 GUILayout.Width(EditorGUIUtility.labelWidth));
             currentLevel.score1 = EditorGUILayout.IntField(currentLevel.score1, GUILayout.Width(70));
@@ -291,28 +269,16 @@ namespace GameVanilla.Editor
 
             GUILayout.EndHorizontal();
 
-            if (currentLevel.limitType == LimitType.Moves)
+            if (currentLevel.awardSpecialCandies)
             {
-                EditorGUIUtility.labelWidth = 140;
                 GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(new GUIContent("Award special candies",
-                        "Enable this if you want special candies equal to the number of remaining moves to be awarded to the player at the end of the game."),
-                    GUILayout.Width(EditorGUIUtility.labelWidth));
-                currentLevel.awardSpecialCandies =
-                    EditorGUILayout.Toggle(currentLevel.awardSpecialCandies);
-                GUILayout.EndHorizontal();
-
-                if (currentLevel.awardSpecialCandies)
-                {
-                    GUILayout.BeginHorizontal();
                 EditorGUILayout.LabelField(new GUIContent("Type", "The type of special candy to award."),
                     GUILayout.Width(EditorGUIUtility.labelWidth));
-                    currentLevel.awardedSpecialCandyType =
-                        (AwardedSpecialCandyType)EditorGUILayout.EnumPopup(currentLevel.awardedSpecialCandyType, GUILayout.Width(100));
-                    GUILayout.EndHorizontal();
-                }
-                EditorGUIUtility.labelWidth = 90;
+                currentLevel.awardedSpecialCandyType =
+                    (AwardedSpecialCandyType)EditorGUILayout.EnumPopup(currentLevel.awardedSpecialCandyType, GUILayout.Width(100));
+                GUILayout.EndHorizontal();
             }
+            EditorGUIUtility.labelWidth = 90;
         }
 
         /// <summary>

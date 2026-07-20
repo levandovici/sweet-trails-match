@@ -46,7 +46,7 @@ namespace GameVanilla.Core
             {
                 nameToSound.Add(sound.name, sound);
             }
-            bgMusic = FindFirstObjectByType<BackgroundMusic>();
+            bgMusic = FindAnyObjectByType<BackgroundMusic>();
         }
 
         /// <summary>

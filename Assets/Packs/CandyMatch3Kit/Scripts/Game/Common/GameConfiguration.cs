@@ -12,6 +12,7 @@ using UnityEngine;
 
 namespace GameVanilla.Game.Common
 {
+    [Serializable]
     public abstract class ScoreOverride
     {
         public int score;
@@ -27,6 +28,7 @@ namespace GameVanilla.Game.Common
 #endif
     }
 
+    [Serializable]
     public class TileScore : ScoreOverride
     {
         public TileScoreType type;
@@ -53,6 +55,7 @@ namespace GameVanilla.Game.Common
         }
     }
 
+    [Serializable]
     public class ElementScore : ScoreOverride
     {
         public ElementType type;
@@ -85,12 +88,6 @@ namespace GameVanilla.Game.Common
     [Serializable]
     public class GameConfiguration
     {
-        public int maxLives;
-        public int timeToNextLife;
-        public int livesRefillCost;
-
-        public int initialCoins;
-
         public int numExtraMoves;
         public int extraMovesCost;
         public int numExtraTime;
@@ -116,7 +113,6 @@ namespace GameVanilla.Game.Common
 
         public int spinWheelCost;
         public int spinWheelCostIncrement;
-        public List<SpinWheelItem> spinWheelItems = new List<SpinWheelItem>();
 
         /// <summary>
         /// Constructor.
@@ -140,15 +136,6 @@ namespace GameVanilla.Game.Common
             dailyBonus.Add(new DailyBonusItem { type = DailyBonusType.Coins4, amount = 50 });
             dailyBonus.Add(new DailyBonusItem { type = DailyBonusType.Coins5, amount = 100 });
             dailyBonus.Add(new DailyBonusItem { type = DailyBonusType.Coins6, amount = 300 });
-
-            spinWheelItems.Add(new SpinWheelItem { type = DailyBonusType.Coins1, amount = 10 });
-            spinWheelItems.Add(new SpinWheelItem { type = DailyBonusType.Coins2, amount = 20 });
-            spinWheelItems.Add(new SpinWheelItem { type = DailyBonusType.Coins3, amount = 30 });
-            spinWheelItems.Add(new SpinWheelItem { type = DailyBonusType.Coins3, amount = 40 });
-            spinWheelItems.Add(new SpinWheelItem { type = DailyBonusType.Coins4, amount = 50 });
-            spinWheelItems.Add(new SpinWheelItem { type = DailyBonusType.Coins5, amount = 100 });
-            spinWheelItems.Add(new SpinWheelItem { type = DailyBonusType.Coins6, amount = 300 });
-            spinWheelItems.Add(new SpinWheelItem { type = DailyBonusType.Coins6, amount = 500 });
         }
 
         /// <summary>

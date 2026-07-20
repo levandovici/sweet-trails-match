@@ -124,14 +124,6 @@ namespace GameVanilla.Editor
 
                 GUILayout.Space(15);
 
-                DrawLivesSettings();
-
-                GUILayout.Space(15);
-
-                DrawCoinsSettings();
-
-                GUILayout.Space(15);
-
                 DrawPurchasableBoosterSettings();
 
                 GUILayout.Space(15);
@@ -290,43 +282,6 @@ namespace GameVanilla.Editor
                 parentEditor.gameConfig.spinWheelCostIncrement = EditorGUILayout.IntField(parentEditor.gameConfig.spinWheelCostIncrement, GUILayout.Width(50));
                 GUILayout.EndHorizontal();
 
-                GUILayout.Space(15);
-
-                var spinWheelItems = parentEditor.gameConfig.spinWheelItems;
-                var labels = new []
-                {
-                    "Blue (dark)",
-                    "Green",
-                    "Yellow",
-                    "Orange",
-                    "Pink",
-                    "Red",
-                    "Purple",
-                    "Blue (light)"
-                };
-                for (var i = 0; i < spinWheelItems.Count; i++)
-                {
-                    GUILayout.BeginHorizontal();
-
-                    GUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField(
-                        new GUIContent(labels[i], "The type of bonus."),
-                        GUILayout.Width(60));
-                    spinWheelItems[i].type = (DailyBonusType)EditorGUILayout.EnumPopup(spinWheelItems[i].type, GUILayout.Width(75));
-                    GUILayout.EndHorizontal();
-
-                    GUILayout.Space(-430);
-
-                    GUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField(
-                        new GUIContent("Amount", "The bonus amount."),
-                        GUILayout.Width(60));
-                    spinWheelItems[i].amount = EditorGUILayout.IntField(spinWheelItems[i].amount, GUILayout.Width(50));
-                    GUILayout.EndHorizontal();
-
-                    GUILayout.EndHorizontal();
-                }
-
                 EditorGUIUtility.labelWidth = oldLabelWidth;
             }
         }
@@ -419,62 +374,6 @@ namespace GameVanilla.Editor
                 DrawScoreOverride(currentScoreOverride);
             }
 
-            GUILayout.EndHorizontal();
-        }
-
-        /// <summary>
-        /// Draws the lives settings.
-        /// </summary>
-        private void DrawLivesSettings()
-        {
-            var gameConfig = parentEditor.gameConfig;
-
-            EditorGUILayout.LabelField("Lives", EditorStyles.boldLabel);
-            GUILayout.BeginHorizontal(GUILayout.Width(300));
-            EditorGUILayout.HelpBox(
-                "The settings related to the lives system.", MessageType.Info);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(new GUIContent("Max lives",
-                    "The maximum number of lives that the player can have."),
-                GUILayout.Width(EditorGUIUtility.labelWidth));
-            gameConfig.maxLives = EditorGUILayout.IntField(gameConfig.maxLives, GUILayout.Width(30));
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(new GUIContent("Time to next life",
-                    "The number of seconds that need to pass before the player is given a free life."),
-                GUILayout.Width(EditorGUIUtility.labelWidth));
-            gameConfig.timeToNextLife = EditorGUILayout.IntField(gameConfig.timeToNextLife, GUILayout.Width(70));
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(new GUIContent("Refill cost",
-                    "The cost in coins of refilling the lives of the player up to its maximum number."),
-                GUILayout.Width(EditorGUIUtility.labelWidth));
-            gameConfig.livesRefillCost = EditorGUILayout.IntField(gameConfig.livesRefillCost, GUILayout.Width(70));
-            GUILayout.EndHorizontal();
-        }
-
-        /// <summary>
-        /// Draws the coins settings.
-        /// </summary>
-        private void DrawCoinsSettings()
-        {
-            var gameConfig = parentEditor.gameConfig;
-
-            EditorGUILayout.LabelField("Coins", EditorStyles.boldLabel);
-            GUILayout.BeginHorizontal(GUILayout.Width(300));
-            EditorGUILayout.HelpBox(
-                "The settings related to the coins system.", MessageType.Info);
-            GUILayout.EndHorizontal();
-
-            GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(new GUIContent("Initial coins",
-                    "The initial number of coins given to the player."),
-                GUILayout.Width(EditorGUIUtility.labelWidth));
-            gameConfig.initialCoins = EditorGUILayout.IntField(gameConfig.initialCoins, GUILayout.Width(70));
             GUILayout.EndHorizontal();
         }
 

@@ -3,6 +3,7 @@
 // a copy of which is available at http://unity3d.com/company/legal/as_terms.
 
 #if UNITY_EDITOR
+using System;
 using UnityEditor;
 using UnityEngine;
 #endif
@@ -25,6 +26,7 @@ namespace GameVanilla.Game.Common
     /// <summary>
     /// An in-app purchasable item.
     /// </summary>
+    [Serializable]
     public class IapItem
     {
         public string storeId;

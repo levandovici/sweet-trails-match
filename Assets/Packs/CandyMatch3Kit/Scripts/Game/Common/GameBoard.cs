@@ -56,9 +56,6 @@ namespace GameVanilla.Game.Common
         [HideInInspector]
         public GameState gameState = new GameState();
 
-        [HideInInspector]
-        public int currentLimit;
-
         private List<GameObject> tiles;
         private List<GameObject> honeys;
         private List<GameObject> ices;
@@ -91,8 +88,6 @@ namespace GameVanilla.Game.Common
 
         private readonly List<GameObject> suggestedMatch = new List<GameObject>();
         private Coroutine suggestedMatchCoroutine;
-
-        private Coroutine countdownCoroutine;
 
         private bool currentlyAwarding;
         public bool CurrentlyAwarding
@@ -234,7 +229,6 @@ namespace GameVanilla.Game.Common
                 }
             }
 
-            currentLimit = level.limit;
             currentlyAwarding = false;
 
             consecutiveCascades = 0;
@@ -243,8 +237,6 @@ namespace GameVanilla.Game.Common
 
             gameState.Reset();
 
-            gameUi.SetLimitType(level.limitType);
-            gameUi.SetLimit(level.limit);
             gameUi.SetGoals(level.goals, true);
             gameUi.InitializeProgressBar(level.score1, level.score2, level.score3);
             UpdateScore(0);
@@ -402,73 +394,7 @@ namespace GameVanilla.Game.Common
         /// </summary>
         public void StartGame()
         {
-            if (level.limitType == LimitType.Time)
-            {
-                countdownCoroutine = StartCoroutine(StartCountdown());
-            }
-
             suggestedMatchCoroutine = StartCoroutine(HighlightRandomMatchAsync());
-        }
-
-        /// <summary>
-        /// Ends the current game.
-        /// </summary>
-        public void EndGame()
-        {
-            if (countdownCoroutine != null)
-            {
-                StopCoroutine(countdownCoroutine);
-            }
-        }
-
-        /// <summary>
-        /// Continues the current game.
-        /// </summary>
-        public void Continue()
-        {
-            if (level.limitType == LimitType.Moves)
-            {
-                currentLimit = gameConfig.numExtraMoves;
-                gameUi.SetLimit(currentLimit);
-            }
-            else if (level.limitType == LimitType.Time)
-            {
-                currentLimit = gameConfig.numExtraTime;
-                gameUi.SetLimit(currentLimit);
-                countdownCoroutine = StartCoroutine(StartCountdown());
-            }
-        }
-
-        /// <summary>
-        /// Starts the level countdown (used only in time-limited levels).
-        /// </summary>
-        /// <returns>The coroutine.</returns>
-        private IEnumerator StartCountdown()
-        {
-            while (currentLimit > 0)
-            {
-                --currentLimit;
-                UpdateLimitText();
-                yield return new WaitForSeconds(1.0f);
-            }
-
-            gameScene.CheckEndGame();
-        }
-
-        /// <summary>
-        /// Updates the limit text.
-        /// </summary>
-        private void UpdateLimitText()
-        {
-            if (level.limitType == LimitType.Moves)
-            {
-                gameUi.SetLimit(currentLimit);
-            }
-            else if (level.limitType == LimitType.Time)
-            {
-                var timeSpan = TimeSpan.FromSeconds(currentLimit);
-                gameUi.SetLimit(string.Format("{0:D2}:{1:D2}", timeSpan.Minutes, timeSpan.Seconds));
-            }
         }
 
         /// <summary>
@@ -851,17 +777,6 @@ namespace GameVanilla.Game.Common
         private void PerformMove()
         {
             ClearSuggestedMatch();
-
-            if (level.limitType == LimitType.Moves)
-            {
-                currentLimit -= 1;
-                if (currentLimit < 0)
-                {
-                    currentLimit = 0;
-                }
-
-                gameUi.SetLimit(currentLimit);
-            }
         }
 
         /// <summary>
@@ -2411,10 +2326,14 @@ namespace GameVanilla.Game.Common
         private IEnumerator AwardSpecialCandiesAsync()
         {
             currentlyAwarding = true;
+
             yield return new WaitForSeconds(1.0f);
+
             gameScene.OpenPopup<SpecialCandiesAwardPopup>("Popups/SpecialCandiesAwardPopup");
+
             yield return new WaitForSeconds(1.5f);
-            while (currentLimit > 0)
+
+            for(int i = 0; i < 3; i++)
             {
                 int randomIdx;
                 do
@@ -2449,8 +2368,6 @@ namespace GameVanilla.Game.Common
 
                 SoundManager.instance.PlaySound("BoosterAward");
 
-                currentLimit -= 1;
-                UpdateLimitText();
                 yield return new WaitForSeconds(GameplayConstants.TimeBetweenRewardedCandiesCreation);
             }
 

@@ -114,7 +114,6 @@ namespace GameVanilla.Game.Scenes
 		public void EndGame()
 		{
 			gameFinished = true;
-		    gameBoard.EndGame();
 		}
 
 	    /// <summary>
@@ -135,7 +134,6 @@ namespace GameVanilla.Game.Scenes
         public void Continue()
         {
             gameFinished = false;
-            gameBoard.Continue();
         }
 
         /// <summary>
@@ -158,10 +156,6 @@ namespace GameVanilla.Game.Scenes
                 }
             }
 
-            if (gameBoard.currentLimit == 0)
-            {
-                EndGame();
-            }
 
             if (goalsComplete)
             {
@@ -182,7 +176,7 @@ namespace GameVanilla.Game.Scenes
                     PuzzleMatchManager.instance.unlockedNextLevel = false;
                 }
 
-                if (level.limitType == LimitType.Moves && level.awardSpecialCandies && gameBoard.currentLimit > 0)
+                if (level.awardSpecialCandies)
                 {
                     gameBoard.AwardSpecialCandies();
                 }
@@ -195,7 +189,7 @@ namespace GameVanilla.Game.Scenes
             {
                 if (gameFinished)
                 {
-                    StartCoroutine(OpenNoMovesOrTimePopupAsync());
+                    OpenLosePopup();
                 }
             }
         }
@@ -253,22 +247,12 @@ namespace GameVanilla.Game.Scenes
         /// </summary>
         public void OpenLosePopup()
         {
-            PuzzleMatchManager.instance.livesSystem.RemoveLife();
             OpenPopup<LosePopup>("Popups/LosePopup", popup =>
             {
                 popup.SetLevel(level.id);
                 popup.SetScore(gameBoard.gameState.score);
                 popup.SetGoals(gameUi.goalGroup);
             });
-        }
-
-        /// <summary>
-        /// Opens the popup for buying additional moves or time.
-        /// </summary>
-        private void OpenNoMovesOrTimePopup()
-        {
-            OpenPopup<NoMovesOrTimePopup>("Popups/NoMovesOrTimePopup",
-                popup => { popup.SetGameScene(this); });
         }
 
         /// <summary>
@@ -294,16 +278,6 @@ namespace GameVanilla.Game.Scenes
         {
             yield return new WaitForSeconds(GameplayConstants.EndGamePopupDelay);
             OpenWinPopup();
-        }
-
-        /// <summary>
-        /// Opens the popup for buying additional moves or time.
-        /// </summary>
-        /// <returns>The coroutine.</returns>
-        private IEnumerator OpenNoMovesOrTimePopupAsync()
-        {
-            yield return new WaitForSeconds(GameplayConstants.EndGamePopupDelay);
-            OpenNoMovesOrTimePopup();
         }
 
         /// <summary>

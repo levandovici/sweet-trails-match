@@ -33,19 +33,6 @@ namespace GameVanilla.Game.Popups
         {
             switch (currentType)
             {
-                case DailyBonusType.Coins1:
-                case DailyBonusType.Coins2:
-                case DailyBonusType.Coins3:
-                case DailyBonusType.Coins4:
-                case DailyBonusType.Coins5:
-                case DailyBonusType.Coins6:
-                    PuzzleMatchManager.instance.coinsSystem.BuyCoins(currentAmount);
-                    break;
-                
-                case DailyBonusType.Lives:
-                    PuzzleMatchManager.instance.livesSystem.RefillLives();
-                    break;
-
                 case DailyBonusType.Lollipop:
                     IncreaseBoosters(0);
                     break;

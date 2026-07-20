@@ -21,10 +21,6 @@ namespace GameVanilla.Game.Common
         public GameObject goalGroup;
 
 #pragma warning disable 649
-        [SerializeField] private Text limitTitleText;
-
-        [SerializeField] private Text limitText;
-
         [SerializeField] private Text scoreText;
 
         [SerializeField] private ProgressBar progressBar;
@@ -45,8 +41,6 @@ namespace GameVanilla.Game.Common
         /// </summary>
         private void Awake()
         {
-            Assert.IsNotNull(limitTitleText);
-            Assert.IsNotNull(limitText);
             Assert.IsNotNull(scoreText);
             Assert.IsNotNull(progressBar);
             Assert.IsNotNull(goalPrefab);
@@ -55,37 +49,6 @@ namespace GameVanilla.Game.Common
             Assert.IsNotNull(scoreGoalItemText);
             Assert.IsNotNull(scoreGoalOnlyItem);
             Assert.IsNotNull(scoreGoalOnlyItemText);
-        }
-
-        /// <summary>
-        /// Sets the specified limit type in the UI.
-        /// </summary>
-        /// <param name="type">The limit type.</param>
-        public void SetLimitType(LimitType type)
-        {
-            limitTitleText.text = type == LimitType.Moves ? "Moves" : "Time";
-            if (type == LimitType.Time)
-            {
-                limitText.fontSize = 200;
-            }
-        }
-
-        /// <summary>
-        /// Sets the specified limit in the UI.
-        /// </summary>
-        /// <param name="amount">The limit amount.</param>
-        public void SetLimit(int amount)
-        {
-            limitText.text = amount.ToString();
-        }
-
-        /// <summary>
-        /// Sets the specified limit in the UI.
-        /// </summary>
-        /// <param name="amount">The limit amount.</param>
-        public void SetLimit(string amount)
-        {
-            limitText.text = amount;
         }
 
         /// <summary>

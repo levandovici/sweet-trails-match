@@ -19,9 +19,6 @@ namespace GameVanilla.Game.UI
     /// </summary>
     public class IapRow : MonoBehaviour
     {
-        [HideInInspector]
-        public BuyCoinsPopup buyCoinsPopup;
-
 #pragma warning disable 649
         [SerializeField]
         private GameObject mostPopular;
@@ -120,7 +117,7 @@ namespace GameVanilla.Game.UI
                 buyCoinsPopup.OpenLoadingPopup();
             }
             #else
-            PuzzleMatchManager.instance.coinsSystem.BuyCoins(cachedItem.numCoins);
+
             #endif
             GetComponent<PlaySound>().Play("Button");
         }

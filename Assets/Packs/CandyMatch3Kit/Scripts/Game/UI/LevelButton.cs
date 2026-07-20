@@ -141,25 +141,17 @@ namespace GameVanilla.Game.UI
             var scene = GameObject.Find("LevelScene").GetComponent<LevelScene>();
             if (scene != null)
             {
-                var numLives = PlayerPrefs.GetInt("num_lives");
-                if (numLives > 0)
+                if (!FileUtils.FileExists("Levels/" + numLevel))
                 {
-                    if (!FileUtils.FileExists("Levels/" + numLevel))
-                    {
-                        scene.OpenPopup<AlertPopup>("Popups/AlertPopup",
-                            popup => popup.SetText("This level does not exist."));
-                    }
-                    else
-                    {
-                        scene.OpenPopup<StartGamePopup>("Popups/StartGamePopup", popup =>
-                        {
-                            popup.LoadLevelData(numLevel);
-                        });
-                    }
+                    scene.OpenPopup<AlertPopup>("Popups/AlertPopup",
+                        popup => popup.SetText("This level does not exist."));
                 }
                 else
                 {
-                    scene.OpenPopup<BuyLivesPopup>("Popups/BuyLivesPopup");
+                    scene.OpenPopup<StartGamePopup>("Popups/StartGamePopup", popup =>
+                    {
+                        popup.LoadLevelData(numLevel);
+                    });
                 }
             }
         }

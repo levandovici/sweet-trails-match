@@ -46,11 +46,6 @@ namespace GameVanilla.Game.Popups
 	    [SerializeField]
 	    private Text boosterCostText;
 
-	    [SerializeField]
-	    private Text numCoinsText;
-
-	    [SerializeField]
-	    private ParticleSystem coinParticles;
 #pragma warning restore 649
 
 	    private BuyBoosterButton buyButton;
@@ -70,8 +65,6 @@ namespace GameVanilla.Game.Popups
 			Assert.IsNotNull(boosterImage);
 			Assert.IsNotNull(boosterAmountText);
 			Assert.IsNotNull(boosterCostText);
-			Assert.IsNotNull(numCoinsText);
-			Assert.IsNotNull(coinParticles);
 		}
 
 	    /// <summary>
@@ -80,7 +73,6 @@ namespace GameVanilla.Game.Popups
 	    protected override void Start()
 	    {
 		    base.Start();
-		    numCoinsText.text = PlayerPrefs.GetInt("num_coins").ToString();
 	    }
 
 	    /// <summary>
@@ -122,52 +114,5 @@ namespace GameVanilla.Game.Popups
 			boosterAmountText.text = PuzzleMatchManager.instance.gameConfig.ingameBoosterAmount[buyButton.boosterType].ToString();
 			boosterCostText.text = PuzzleMatchManager.instance.gameConfig.ingameBoosterCost[buyButton.boosterType].ToString();
 		}
-
-	    /// <summary>
-	    /// Called when the buy button is pressed.
-	    /// </summary>
-	    public void OnBuyButtonPressed()
-	    {
-		    var playerPrefsKey = string.Format("num_boosters_{0}", (int)buyButton.boosterType);
-		    var numBoosters = PlayerPrefs.GetInt(playerPrefsKey);
-
-		    Close();
-
-		    var gameScene = parentScene as GameScene;
-		    if (gameScene != null)
-		    {
-			    var cost = PuzzleMatchManager.instance.gameConfig.ingameBoosterCost[buyButton.boosterType];
-			    var coins = PlayerPrefs.GetInt("num_coins");
-			    if (cost > coins)
-			    {
-				    var scene = parentScene;
-				    if (scene != null)
-				    {
-                    	SoundManager.instance.PlaySound("Button");
-					    var button = buyButton;
-					    scene.OpenPopup<BuyCoinsPopup>("Popups/BuyCoinsPopup",
-						    popup =>
-						    {
-							    popup.onClose.AddListener(
-								    () =>
-								    {
-									    scene.OpenPopup<BuyBoostersPopup>("Popups/BuyBoostersPopup",
-										    buyBoostersPopup => { buyBoostersPopup.SetBooster(button); });
-
-								    });
-						    });
-				    }
-			    }
-			    else
-			    {
-				    PuzzleMatchManager.instance.coinsSystem.SpendCoins(cost);
-                    coinParticles.Play();
-                    SoundManager.instance.PlaySound("CoinsPopButton");
-				    numBoosters += PuzzleMatchManager.instance.gameConfig.ingameBoosterAmount[buyButton.boosterType];
-				    PlayerPrefs.SetInt(playerPrefsKey, numBoosters);
-				    buyButton.UpdateAmount(numBoosters);
-			    }
-		    }
-	    }
 	}
 }

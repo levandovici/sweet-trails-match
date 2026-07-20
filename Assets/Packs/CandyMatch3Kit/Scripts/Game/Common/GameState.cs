@@ -10,6 +10,7 @@ namespace GameVanilla.Game.Common
     /// <summary>
     ///  This class stores the state of a game at a given point in time.
     /// </summary>
+    [Serializable]
     public class GameState
     {
         public int score;
