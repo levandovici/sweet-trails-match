@@ -9,6 +9,7 @@ using UnityEngine.UI;
 using GameVanilla.Game.Common;
 using GameVanilla.Game.Popups;
 using GameVanilla.Game.Scenes;
+using GameVanilla.Core;
 
 namespace GameVanilla.Game.UI
 {
@@ -56,12 +57,8 @@ namespace GameVanilla.Game.UI
 
 			var playerPrefsKey = string.Format("num_boosters_{0}", (int)boosterType);
 			var numBoosters = PlayerPrefs.GetInt(playerPrefsKey);
-			if (numBoosters == 0)
-			{
-				gameScene.OpenPopup<BuyBoostersPopup>("Popups/BuyBoostersPopup", popup => { popup.SetBooster(this); });
-			}
-			else
-			{
+			if (numBoosters != 0)
+			{ 
 				gameScene.EnableBoosterMode(this);
 			}
 		}
@@ -72,17 +69,14 @@ namespace GameVanilla.Game.UI
 		/// <param name="amount">The amount of boosters.</param>
 		public void UpdateAmount(int amount)
 		{
-			if (amount == 0)
-			{
-				amountGroup.SetActive(false);
-				moreGroup.SetActive(true);
-			}
-			else
-			{
-				amountGroup.SetActive(true);
-				moreGroup.SetActive(false);
-				amountText.text = amount.ToString();
-			}
+			if (amount <= 0)
+				gameObject.SetActive(false);
+
+			amountText.text = amount.ToString();
+
+			amountGroup.SetActive(false);
+
+			moreGroup.SetActive(false);
 		}
-	}
+    }
 }

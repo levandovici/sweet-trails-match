@@ -33,41 +33,21 @@ namespace GameVanilla.Game.UI
 		/// <param name="level">The current level.</param>
 		public void SetData(Level level)
 		{
-			if (level.availableBoosters[BoosterType.Lollipop])
-			{
-				button1.UpdateAmount(PlayerPrefs.GetInt("num_boosters_0"));
-			}
-			else
-			{
-				button1.gameObject.SetActive(false);
-			}
+			PlayerPrefs.SetInt("num_boosters_0", 1);
 
-			if (level.availableBoosters[BoosterType.Bomb])
-			{
-				button2.UpdateAmount(PlayerPrefs.GetInt("num_boosters_1"));
-			}
-			else
-			{
-				button2.gameObject.SetActive(false);
-			}
+			PlayerPrefs.SetInt("num_boosters_1", 1);
 
-			if (level.availableBoosters[BoosterType.Switch])
-			{
-				button3.UpdateAmount(PlayerPrefs.GetInt("num_boosters_2"));
-			}
-			else
-			{
-				button3.gameObject.SetActive(false);
-			}
+			PlayerPrefs.SetInt("num_boosters_2", 1);
 
-			if (level.availableBoosters[BoosterType.ColorBomb])
-			{
-				button4.UpdateAmount(PlayerPrefs.GetInt("num_boosters_3"));
-			}
-			else
-			{
-				button4.gameObject.SetActive(false);
-			}
+			PlayerPrefs.SetInt("num_boosters_3", 1);
+
+			button1.UpdateAmount(1);
+
+			button2.UpdateAmount(1);
+
+			button3.UpdateAmount(1);
+
+			button4.UpdateAmount(1);
 		}
 	}
 }
