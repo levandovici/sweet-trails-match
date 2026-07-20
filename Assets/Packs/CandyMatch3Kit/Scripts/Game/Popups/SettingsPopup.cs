@@ -25,6 +25,9 @@ namespace GameVanilla.Game.Popups
         private Slider musicSlider;
 
         [SerializeField]
+        private AnimatedButton privacyPolicyButton;
+
+        [SerializeField]
         private AnimatedButton resetProgressButton;
 
         [SerializeField]
@@ -46,6 +49,7 @@ namespace GameVanilla.Game.Popups
             base.Awake();
             Assert.IsNotNull(soundSlider);
             Assert.IsNotNull(musicSlider);
+            Assert.IsNotNull(privacyPolicyButton);
             Assert.IsNotNull(resetProgressButton);
             Assert.IsNotNull(resetProgressImage);
             Assert.IsNotNull(resetProgressDisabledSprite);
@@ -96,6 +100,11 @@ namespace GameVanilla.Game.Popups
             }
             resetProgressImage.sprite = resetProgressDisabledSprite;
             resetProgressButton.interactable = false;
+        }
+
+        public void OnPrivacyPolicyButtonPressed()
+        {
+            Application.OpenURL("https://michitai.com/privacy-policy.html");
         }
 
         /// <summary>
