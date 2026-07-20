@@ -74,7 +74,7 @@ namespace GameVanilla.Editor
 
             var prevSelectedIndex = selectedTabIndex;
             selectedTabIndex = GUILayout.Toolbar(selectedTabIndex,
-                new[] {"Game", "Resolutions", "Monetization", "Daily bonus", "Spin wheel", "Player preferences"}, GUILayout.Width(670));
+                new[] {"Game", "Resolutions", "Monetization", "Player preferences"}, GUILayout.Width(670));
 
             if (selectedTabIndex != prevSelectedIndex)
             {
@@ -92,14 +92,6 @@ namespace GameVanilla.Editor
             else if (selectedTabIndex == 2)
             {
                 DrawMonetizationTab();
-            }
-            else if (selectedTabIndex == 3)
-            {
-                DrawDailyBonusTab();
-            }
-            else if (selectedTabIndex == 4)
-            {
-                DrawSpinWheelTab();
             }
             else
             {
@@ -198,91 +190,6 @@ namespace GameVanilla.Editor
                 GUILayout.Space(15);
 
                 DrawIapSettings();
-            }
-        }
-
-        /// <summary>
-        /// Draws the daily bonus tab.
-        /// </summary>
-        private void DrawDailyBonusTab()
-        {
-            if (parentEditor.gameConfig != null)
-            {
-                GUILayout.Space(15);
-
-                var oldLabelWidth = EditorGUIUtility.labelWidth;
-                EditorGUIUtility.labelWidth = 80;
-
-                EditorGUILayout.LabelField("Daily bonus settings", EditorStyles.boldLabel);
-                GUILayout.BeginHorizontal(GUILayout.Width(300));
-                const string helpText =
-                    "Here you can define the daily bonuses the player will be rewarded with for every consecutive day playing the game.";
-                EditorGUILayout.HelpBox(helpText, MessageType.Info);
-                GUILayout.EndHorizontal();
-
-                var dailyBonus = parentEditor.gameConfig.dailyBonus;
-                var label = "Day";
-                for (var i = 0; i < dailyBonus.Count; i++)
-                {
-                    GUILayout.BeginHorizontal();
-
-                    GUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField(
-                        new GUIContent($"{label} {i + 1}", "The type of bonus."),
-                        GUILayout.Width(40));
-                    dailyBonus[i].type = (DailyBonusType)EditorGUILayout.EnumPopup(dailyBonus[i].type, GUILayout.Width(75));
-                    GUILayout.EndHorizontal();
-
-                    GUILayout.Space(-450);
-
-                    GUILayout.BeginHorizontal();
-                    EditorGUILayout.LabelField(
-                        new GUIContent("Amount", "The bonus amount."),
-                        GUILayout.Width(60));
-                    dailyBonus[i].amount = EditorGUILayout.IntField(dailyBonus[i].amount, GUILayout.Width(50));
-                    GUILayout.EndHorizontal();
-
-                    GUILayout.EndHorizontal();
-                }
-
-                EditorGUIUtility.labelWidth = oldLabelWidth;
-            }
-        }
-
-        /// <summary>
-        /// Draws the spin wheel tab.
-        /// </summary>
-        private void DrawSpinWheelTab()
-        {
-            if (parentEditor.gameConfig != null)
-            {
-                GUILayout.Space(15);
-
-                var oldLabelWidth = EditorGUIUtility.labelWidth;
-                EditorGUIUtility.labelWidth = 80;
-
-                EditorGUILayout.LabelField("Spin wheel settings", EditorStyles.boldLabel);
-                GUILayout.BeginHorizontal(GUILayout.Width(300));
-                const string helpText =
-                    "Here you can define the bonuses available in the spin wheel.";
-                EditorGUILayout.HelpBox(helpText, MessageType.Info);
-                GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(
-                    new GUIContent("Cost", "The cost of spinning the wheel."),
-                    GUILayout.Width(100));
-                parentEditor.gameConfig.spinWheelCost = EditorGUILayout.IntField(parentEditor.gameConfig.spinWheelCost, GUILayout.Width(50));
-                GUILayout.EndHorizontal();
-
-                GUILayout.BeginHorizontal();
-                EditorGUILayout.LabelField(
-                    new GUIContent("Cost increment", "The increment in the cost of spinning the wheel."),
-                    GUILayout.Width(100));
-                parentEditor.gameConfig.spinWheelCostIncrement = EditorGUILayout.IntField(parentEditor.gameConfig.spinWheelCostIncrement, GUILayout.Width(50));
-                GUILayout.EndHorizontal();
-
-                EditorGUIUtility.labelWidth = oldLabelWidth;
             }
         }
 

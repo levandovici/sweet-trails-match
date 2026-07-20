@@ -109,8 +109,6 @@ namespace GameVanilla.Game.Common
         public int rewardedAdCoins;
         public List<IapItem> iapItems = new List<IapItem>();
 
-        public List<DailyBonusItem> dailyBonus = new List<DailyBonusItem>();
-
         public int spinWheelCost;
         public int spinWheelCostIncrement;
 
@@ -128,14 +126,6 @@ namespace GameVanilla.Game.Common
             ingameBoosterCost.Add(BoosterType.Bomb, 100);
             ingameBoosterCost.Add(BoosterType.Switch, 100);
             ingameBoosterCost.Add(BoosterType.ColorBomb, 100);
-
-            dailyBonus.Add(new DailyBonusItem { type = DailyBonusType.Coins1, amount = 10 });
-            dailyBonus.Add(new DailyBonusItem { type = DailyBonusType.Coins2, amount = 20 });
-            dailyBonus.Add(new DailyBonusItem { type = DailyBonusType.Coins3, amount = 30 });
-            dailyBonus.Add(new DailyBonusItem { type = DailyBonusType.Coins3, amount = 40 });
-            dailyBonus.Add(new DailyBonusItem { type = DailyBonusType.Coins4, amount = 50 });
-            dailyBonus.Add(new DailyBonusItem { type = DailyBonusType.Coins5, amount = 100 });
-            dailyBonus.Add(new DailyBonusItem { type = DailyBonusType.Coins6, amount = 300 });
         }
 
         /// <summary>
