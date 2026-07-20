@@ -75,8 +75,6 @@ namespace GameVanilla.Game.Popups
         /// </summary>
         public void OnSaveButtonPressed()
         {
-            SoundManager.instance.SetSoundEnabled(currentSound == 1);
-            SoundManager.instance.SetMusicEnabled(currentMusic == 1);
             var homeScene = parentScene as HomeScene;
             if (homeScene != null)
             {
@@ -108,7 +106,7 @@ namespace GameVanilla.Game.Popups
             parentScene.OpenPopup<AlertPopup>("Popups/AlertPopup", popup =>
             {
                 popup.SetTitle("Help");
-                popup.SetText("Do you need help?");
+                popup.SetText("Do you need help?\nsupport@michitai.com");
             }, false);
         }
 
@@ -120,7 +118,7 @@ namespace GameVanilla.Game.Popups
             parentScene.OpenPopup<AlertPopup>("Popups/AlertPopup", popup =>
             {
                 popup.SetTitle("About");
-                popup.SetText("Created by gamevanilla.\n Copyright (C) 2018.");
+                popup.SetText("Created by MICHITAI GAMES.\n Copyright (C) 2026.");
             }, false);
         }
 
@@ -130,6 +128,8 @@ namespace GameVanilla.Game.Popups
         public void OnSoundSliderValueChanged()
         {
             currentSound = (int) soundSlider.value;
+
+            SoundManager.instance.SetSoundEnabled(currentSound == 1);
         }
 
         /// <summary>
@@ -138,6 +138,8 @@ namespace GameVanilla.Game.Popups
         public void OnMusicSliderValueChanged()
         {
             currentMusic = (int) musicSlider.value;
+
+            SoundManager.instance.SetMusicEnabled(currentMusic == 1);
         }
     }
 }

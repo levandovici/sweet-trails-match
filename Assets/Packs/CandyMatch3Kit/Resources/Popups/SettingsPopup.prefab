@@ -940,7 +940,6 @@ MonoBehaviour:
           m_StringArgument: PopupClose
           m_BoolArgument: 0
         m_CallState: 2
-  avatarToggleGroup: {fileID: 0}
   soundSlider: {fileID: 114424997096700294}
   musicSlider: {fileID: 114626188000979006}
   resetProgressButton: {fileID: 114023729765752358}
@@ -1592,7 +1591,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Save
+  m_Text: Back
 --- !u!1 &1560519955899646
 GameObject:
   m_ObjectHideFlags: 0
