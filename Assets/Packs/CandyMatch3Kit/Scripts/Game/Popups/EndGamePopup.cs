@@ -30,11 +30,6 @@ namespace GameVanilla.Game.Popups
         [SerializeField]
         private Text scoreOnlyReachedText;
         
-        [SerializeField]
-        private GameObject girl;
-        
-        [SerializeField]
-        private GameObject boy;
 #pragma warning restore 649
 
         /// <summary>
@@ -47,8 +42,6 @@ namespace GameVanilla.Game.Popups
             Assert.IsNotNull(scoreText);
             Assert.IsNotNull(goalGroup);
             Assert.IsNotNull(scoreOnlyReachedText);
-            Assert.IsNotNull(girl);
-            Assert.IsNotNull(boy);
         }
         
         /// <summary>
@@ -57,11 +50,6 @@ namespace GameVanilla.Game.Popups
         protected override void Start()
         {
             base.Start();
-            var avatarSelected = PlayerPrefs.GetInt("avatar_selected");
-            if (avatarSelected == 0)
-                boy.SetActive(false);
-            else
-                girl.SetActive(false);
         }
 
         /// <summary>

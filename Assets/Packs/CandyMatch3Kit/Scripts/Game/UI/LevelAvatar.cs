@@ -18,9 +18,6 @@ namespace GameVanilla.Game.UI
         private Sprite girlAvatarSprite;
 
         [SerializeField]
-        private Sprite boyAvatarSprite;
-
-        [SerializeField]
         private Image avatarImage;
 #pragma warning restore 649
 
@@ -33,7 +30,6 @@ namespace GameVanilla.Game.UI
         private void Awake()
         {
             Assert.IsNotNull(girlAvatarSprite);
-            Assert.IsNotNull(boyAvatarSprite);
             Assert.IsNotNull(avatarImage);
         }
 
@@ -42,8 +38,7 @@ namespace GameVanilla.Game.UI
         /// </summary>
         private void Start()
         {
-            var avatarSelected = PlayerPrefs.GetInt("avatar_selected");
-            avatarImage.sprite = avatarSelected == 0 ? girlAvatarSprite : boyAvatarSprite;
+            avatarImage.sprite = girlAvatarSprite;
         }
 
         /// <summary>

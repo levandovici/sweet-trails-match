@@ -27,9 +27,7 @@ namespace GameVanilla.Game.UI
         public int star3;
 
         public GameObject girlAvatar;
-        public GameObject boyAvatar;
         public Animator girlAnimator;
-        public Animator boyAnimator;
         private Animator avatarAnimator;
 
         private bool star1Achieved;
@@ -41,17 +39,7 @@ namespace GameVanilla.Game.UI
         /// </summary>
         private void Start()
         {
-            var avatarSelected = PlayerPrefs.GetInt("avatar_selected");
-            if (avatarSelected == 0)
-            {
-                avatarAnimator = girlAnimator;
-                boyAvatar.SetActive(false);
-            }
-            else
-            {
-                avatarAnimator = boyAnimator;
-                girlAvatar.SetActive(false);
-            }
+            avatarAnimator = girlAnimator;
         }
 
         /// <summary>
