@@ -2,6 +2,7 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!687078895 &4343727234628468602
 SpriteAtlas:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -80,3 +81,4 @@ SpriteAtlas:
   m_RenderDataMap: {}
   m_Tag: StartGamePopup
   m_IsVariant: 0
+  m_Guid: 4f19fd6d2d0bb4a4b8755de14449f7f7
